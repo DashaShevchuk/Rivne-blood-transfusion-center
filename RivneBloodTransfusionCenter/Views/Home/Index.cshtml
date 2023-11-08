@@ -2,7 +2,65 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome1</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="container my-5" style="padding-top: 25px">
+    <div class="row p-4 pb-0 pe-lg-0 pt-lg-5 align-items-center rounded-3 border shadow-lg">
+        <div class="col-lg-7 p-3 p-lg-5 pt-lg-3">
+            <h1 class="display-4 fw-bold lh-1">Дізнайтеся більше про те, як стати донором крові на нашому веб-сайті.</h1>
+            <p class="lead">ров потрібна для операцій, травм, хвороб і інших медичних процедур. Донація крові допомагає забезпечити пацієнтів тією кров'ю, яка їм потрібна, щоб вижити.</p>
+            <div class="d-grid gap-2 d-md-flex justify-content-md-start mb-4 mb-lg-3">
+                <button type="button" class="btn btn-primary btn-lg px-4 me-md-2 fw-bold">Я хочу допомогти</button>
+            </div>
+        </div>
+        <div class="col-lg-4 offset-lg-1 p-0 overflow-hidden">
+            <img class="rounded-lg-3" src="~/src/photos/blood.png" alt="" width="400">
+        </div>
+    </div>
 </div>
+
+<div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-4">
+                <h4 class="text-center">Зареєстрованих донорів в нашій системі</h4>
+                <p class="text-center" style="font-size: 4rem; color: red;">400</p>
+            </div>
+            <div class="col-md-4">
+                <h4 class="text-center">Здійснено перевезень крові до фронту</h4>
+                <p class="text-center" style="font-size: 4rem; color: red;">400</p>
+            </div>
+            <div class="col-md-4">
+                <h4 class="text-center">Опрацювано запитів від пацієнтів з 2015 року</h4>
+                <p class="text-center" style="font-size: 4rem; color: red;">400</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+  <div class="container px-4 py-5" id="custom-cards">
+    <h2 class="pb-2 border-bottom">Наші проекти</h2>
+
+    <div class="row row-cols-1 row-cols-lg-3 align-items-stretch g-4 py-5">
+      <div class="col">
+        <div class="card card-cover h-100 overflow-hidden text-white bg-dark rounded-5 shadow-lg" style="background-image: url('unsplash-photo-1.jpg');">
+          <div class="d-flex flex-column h-100 p-5 pb-3 text-white text-shadow-1">
+            <h2 class="pt-5 mt-5 mb-4 display-6 lh-1 fw-bold">1</h2>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="card card-cover h-100 overflow-hidden text-white bg-dark rounded-5 shadow-lg" style="background-image: url('unsplash-photo-2.jpg');">
+          <div class="d-flex flex-column h-100 p-5 pb-3 text-white text-shadow-1">
+            <h2 class="pt-5 mt-5 mb-4 display-6 lh-1 fw-bold">2</h2>
+          </div>
+        </div>
+      </div>
+
+      <div class="col">
+        <div class="card card-cover h-100 overflow-hidden text-white bg-dark rounded-5 shadow-lg" style="background-image: url('unsplash-photo-3.jpg');">
+          <div class="d-flex flex-column h-100 p-5 pb-3 text-shadow-1">
+            <h2 class="pt-5 mt-5 mb-4 display-6 lh-1 fw-bold">3</h2>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

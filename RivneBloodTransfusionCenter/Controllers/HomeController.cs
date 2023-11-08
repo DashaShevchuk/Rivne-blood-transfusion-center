@@ -18,7 +18,12 @@ namespace RivneBloodTransfusionCenter.Controllers
             return View();
         }
 
-        public IActionResult Privacy()
+        public IActionResult Centers()
+        {
+            return View();
+        }
+
+        public IActionResult Request()
         {
             return View();
         }

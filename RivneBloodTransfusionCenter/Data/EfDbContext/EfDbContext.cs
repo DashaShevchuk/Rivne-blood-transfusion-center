@@ -7,11 +7,11 @@ using RivneBloodTransfusionCenter.Data.Configurations;
 
 namespace RivneBloodTransfusionCenter.Data.EfDbContext
 {
-    public class EfDbContext : IdentityDbContext<DbUser, DbRole, string, IdentityUserClaim<string>,
+    public class EfContext : IdentityDbContext<DbUser, DbRole, string, IdentityUserClaim<string>,
                                               DbUserRole, IdentityUserLogin<string>,
                                               IdentityRoleClaim<string>, IdentityUserToken<string>>
     {
-        public EfDbContext(DbContextOptions<EfDbContext> options)
+        public EfContext(DbContextOptions<EfContext> options)
         : base(options)
         {
 
@@ -21,6 +21,7 @@ namespace RivneBloodTransfusionCenter.Data.EfDbContext
         public virtual DbSet<Sickness> Sicknesses { get; set; }
         public virtual DbSet<RecipientProfile> RecipientProfiles { get; set; }
         public virtual DbSet<DonorProfile> DonorProfiles { get; set; }
+        public virtual DbSet<AdminProfile> AdminProfiles { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
@@ -33,6 +34,7 @@ namespace RivneBloodTransfusionCenter.Data.EfDbContext
             modelBuilder.ApplyConfiguration(new SicknessConfiguration());
             modelBuilder.ApplyConfiguration(new RecipientProfileConfiguration());
             modelBuilder.ApplyConfiguration(new DonorProfileConfiguration());
+            modelBuilder.ApplyConfiguration(new AdminProfileConfiguration());
         }
     }
 }

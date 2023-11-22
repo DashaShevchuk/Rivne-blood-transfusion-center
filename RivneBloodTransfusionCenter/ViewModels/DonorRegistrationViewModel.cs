@@ -4,7 +4,7 @@ namespace RivneBloodTransfusionCenter.ViewModels
 {
     public class DonorRegistrationViewModel
     {
-        public IEnumerable<Sex> sexes { get; set; }
-        public IEnumerable<BloodType> bloodTypes { get; set; }
+        public IEnumerable<Sex> Sexes { get; set; }
+        public IEnumerable<BloodType> BloodTypes { get; set; }
     }
 }

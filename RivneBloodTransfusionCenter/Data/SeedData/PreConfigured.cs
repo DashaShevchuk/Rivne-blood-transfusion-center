@@ -36,6 +36,21 @@ namespace RivneBloodTransfusionCenter.Data.SeedData
                 throw exception;
             }
         }
+        public static async Task SeedSexes(EfContext context)
+        {
+            try
+            {
+                if (!context.Sexes.Any())
+                {
+                    await context.Sexes.AddRangeAsync(new Sex { Name = "Чоловік" }, new Sex { Name = "Жінка" });
+                    await context.SaveChangesAsync();
+                }
+            }
+            catch (Exception exception)
+            {
+                throw exception;
+            }
+        }
         public static async Task SeedUsers(UserManager<DbUser> userManager, EfContext context)
         {
 

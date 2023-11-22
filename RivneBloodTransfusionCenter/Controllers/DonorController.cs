@@ -9,5 +9,10 @@ namespace RivneBloodTransfusionCenter.Controllers
         {
             return View();
         }
+        [HttpGet]
+        public IActionResult Registration()
+        {
+            return View();
+        }
     }
 }

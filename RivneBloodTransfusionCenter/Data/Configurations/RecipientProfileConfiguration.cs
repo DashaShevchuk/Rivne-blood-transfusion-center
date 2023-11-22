@@ -23,6 +23,10 @@ namespace RivneBloodTransfusionCenter.Data.Configurations
             builder.HasOne(e => e.Sickness)
             .WithMany(x => x.RecipientProfiles)
             .HasForeignKey(e => e.SicknessId);
+
+            builder.HasOne(e => e.Sex)
+            .WithMany(x => x.RecipientProfiles)
+            .HasForeignKey(e => e.SexId);
         }
     }
 }

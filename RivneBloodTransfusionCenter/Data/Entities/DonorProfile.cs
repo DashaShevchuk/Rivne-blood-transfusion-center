@@ -11,6 +11,9 @@ namespace RivneBloodTransfusionCenter.Data.Entities
         public int BloodTypeId { get; set; }
         public virtual BloodType BloodType { get; set; }
 
+        public int SexId { get; set; }
+        public virtual Sex Sex { get; set; }
+
         public virtual DbUser User { get; set; }
     }
 }

@@ -14,8 +14,17 @@
 
     <div class="shape1"></div>
     <div class="shape2"></div>
-    <div class="container">
-        <form>
+  
+    <div class="container row">
+        <div class="alert alert-danger alert-dismissible d-none fade show full-screen-alert " id="passwordMismatchAlert" role="alert">
+            <strong>Паролі не співпадають!</strong>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        @*<div class="alert alert-danger d-none full-screen-alert" id="passwordMismatchAlert" role="alert">
+        Паролі не співпадають!
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>*@
+              <form class="needs-validation" novalidate>
             <div class="mb-3 d-flex justify-content-center">
                 <h2 class="fw-bold">Реєстрація</h2>
             </div>
@@ -24,16 +33,22 @@
             </div>
             <div class="mb-3 ">
                 <label for="inputFirstName" class="form-label">Прізвище</label>
-                <input type="text" class="form-control" id="inputFirstName">
+                <input type="text" class="form-control" id="inputFirstName" required>
+                <div class="invalid-feedback">
+                    Це поле необхідно заповнити!
+                </div>
             </div>
             <div class="mb-3 ">
                 <label for="inputName" class="form-label">Ім'я</label>
-                <input type="text" class="form-control" id="inputName">
+                <input type="text" class="form-control" id="inputName" required>
+                <div class="invalid-feedback">
+                    Це поле необхідно заповнити!
+                </div>
             </div>
             <div class="mb-3 ">
                 <label for="sexes" class="form-label">Стать</label>
-                <select class="form-select" aria-label="Вибери зі списку">
-                    <option selected>Вибери зі списку</option>
+                <select class="form-select" aria-label="Вибери зі списку" required>
+                    <option value="">Вибери зі списку</option>
                     @{
                         @foreach (var item in Model.Sexes)
                         {
@@ -41,11 +56,14 @@
                         }
                     }
                 </select>
+                <div class="invalid-feedback">
+                    Це поле необхідно заповнити!
+                </div>
             </div>
             <div class="mb-3 ">
                 <label for="bloodTypes" class="form-label">Група крові</label>
-                <select class="form-select" aria-label="Вибери зі списку">
-                    <option selected>Вибери зі списку</option>
+                <select class="form-select" aria-label="Вибери зі списку" required>
+                    <option value="">Вибери зі списку</option>
                     @{
                         @foreach (var item in Model.BloodTypes)
                         {
@@ -53,26 +71,42 @@
                         }
                     }
                 </select>
+                <div class="invalid-feedback">
+                    Це поле необхідно заповнити!
+                </div>
             </div>
             <div class="mb-3 ">
                 <label for="inputPhone" class="form-label">Номер телефону</label>
-                <input type="tel" class="form-control" id="inputPhone">
+                <input type="tel" class="form-control" id="inputPhone" required>
+                <div class="invalid-feedback">
+                    Це поле необхідно заповнити!
+                </div>
             </div>
             <div class="mb-3 ">
                 <label for="inputEmail" class="form-label">Електронна пошта</label>
-                <input type="email" class="form-control" id="inputEmail">
+                <input type="email" class="form-control" id="inputEmail" required>
+                <div class="invalid-feedback">
+                    Це поле необхідно заповнити!
+                </div>
             </div>
             <div class="mb-3 ">
                 <label for="inputPassword" class="form-label">Пароль</label>
-                <input type="password" class="form-control" id="inputPassword">
+                <input type="password" class="form-control" id="inputPassword" required>
+                <div class="invalid-feedback">
+                    Це поле необхідно заповнити!
+                </div>
             </div>
             <div class="mb-3 ">
                 <label for="inputPasswordRepit" class="form-label">Повторіть пароль</label>
-                <input type="password" class="form-control" id="inputPasswordRepit">
+                <input type="password" class="form-control" id="inputPasswordRepit" required>
+                <div class="invalid-feedback">
+                    Це поле необхідно заповнити!
+                </div>
             </div>
             <button type="submit" class="btn btn-secondary w-100">Зареєструватися</button>
         </form>
     </div>
+    <script src="~/js/donor/form-validation.js"></script>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/main.js" asp-append-version="true"></script>

@@ -125,10 +125,6 @@ namespace RivneBloodTransfusionCenter.Data.SeedData
                     {
                         Name = "Четверта негативна, AB(IV)Rh(-)"
                     };
-                    BloodType bloodType9 = new()
-                    {
-                        Name = "Будь-яка"
-                    };
 
                     await context.BloodTypes.AddRangeAsync(bloodType1, bloodType2, bloodType3, bloodType4, bloodType5, bloodType6, bloodType7, bloodType8, bloodType9);
                     await context.SaveChangesAsync();

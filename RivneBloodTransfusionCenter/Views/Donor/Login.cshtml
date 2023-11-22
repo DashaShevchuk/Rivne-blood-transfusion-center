@@ -14,7 +14,7 @@
     <div class="shape1"></div>
     <div class="shape2"></div>
     <div class="container">
-        <form>
+        <form class="needs-validation" novalidate>
             <div class="mb-3 d-flex justify-content-center">
                 <h2 class="fw-bold">Увійти</h2>
             </div>
@@ -23,11 +23,17 @@
             </div>
             <div class="mb-3 ">
                 <label for="inputEmail1" class="form-label">Електронна пошта</label>
-                <input type="email" class="form-control" id="inputEmail1">
+                <input type="email" class="form-control" id="inputEmail1" required>
+                <div class="invalid-feedback">
+                    Це поле необхідно заповнити!
+                </div>
             </div>
             <div class="mb-3">
                 <label for="inputPassword" class="form-label">Пароль</label>
-                <input type="password" class="form-control" id="inputPassword">
+                <input type="password" class="form-control" id="inputPassword" required>
+                <div class="invalid-feedback">
+                    Це поле необхідно заповнити!
+                </div>
             </div>
             <div class="mb-3 form-check">
                 <input type="checkbox" class="form-check-input" id="checkRememberMe">
@@ -36,6 +42,8 @@
             <button type="submit" class="btn btn-secondary w-100">Увійти</button>
         </form>
         </div>
+
+    <script src="~/js/donor/form-validation.js"></script>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/main.js" asp-append-version="true"></script>

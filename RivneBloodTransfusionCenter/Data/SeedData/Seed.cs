@@ -14,6 +14,7 @@ namespace RivneBloodTransfusionCenter.Data.SeedData
                 var managerRole = scope.ServiceProvider.GetRequiredService<RoleManager<DbRole>>();
                 var context = scope.ServiceProvider.GetRequiredService<EfContext>();
                 await PreConfigured.SeedRoles(managerRole);
+                await PreConfigured.SeedSexes(context);
                 await PreConfigured.SeedUsers(manager, context);
                 await PreConfigured.SeedBloodTypes(context);
                 await PreConfigured.SeedDonationTypes(context);

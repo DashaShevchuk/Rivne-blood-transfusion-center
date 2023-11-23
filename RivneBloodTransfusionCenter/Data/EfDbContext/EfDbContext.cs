@@ -19,6 +19,7 @@ namespace RivneBloodTransfusionCenter.Data.EfDbContext
         public virtual DbSet<BloodType> BloodTypes { get; set; }
         public virtual DbSet<DonationType> DonationTypes { get; set; }
         public virtual DbSet<Sickness> Sicknesses { get; set; }
+        public virtual DbSet<Sex> Sexes { get; set; }
         public virtual DbSet<RecipientProfile> RecipientProfiles { get; set; }
         public virtual DbSet<DonorProfile> DonorProfiles { get; set; }
         public virtual DbSet<AdminProfile> AdminProfiles { get; set; }

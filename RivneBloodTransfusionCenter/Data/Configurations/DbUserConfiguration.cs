@@ -10,6 +10,10 @@ namespace RivneBloodTransfusionCenter.Data.Configurations
         {
             builder.HasMany(e => e.UserRoles)
                 .WithOne(e => e.User);
+
+            builder.HasOne(e => e.Sex)
+                .WithMany(x => x.Users)
+                .HasForeignKey(e => e.SexId);
         }
     }
 }

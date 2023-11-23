@@ -6,8 +6,6 @@ namespace RivneBloodTransfusionCenter.Data.Entities
     {
         public string Id { get; set; }
 
-        public string Adress { get; set; }
-
         public int BloodTypeId { get; set; }
         public virtual BloodType BloodType { get; set; }
 

@@ -1,0 +1,122 @@
+﻿@model RivneBloodTransfusionCenter.ViewModels.Donor.RegistrationViewModel;
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=1,initial-scale=1,user-scalable=1" />
+    <title>@ViewData["Title"] - UI</title>
+
+    <link rel="stylesheet" type="text/css" href="~/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/donor/registration-style.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/UI.styles.css" asp-append-version="true" />
+</head>
+<body>
+
+    <div class="shape1"></div>
+    <div class="shape2"></div>
+
+    <div class="container row">
+        <div class="alert alert-danger alert-dismissible d-none fade show full-screen-alert " id="passwordMismatchAlert" role="alert">
+            <strong>Паролі не співпадають!</strong>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        <form class="needs-validation" novalidate method="post" asp-controller="Donor" asp-action="Registration">
+            <div class="mb-3 d-flex justify-content-center">
+                <h2 class="fw-bold">Реєстрація</h2>
+            </div>
+            <div class="mb-3 d-flex justify-content-center">
+                <p>Уже є акаунт? <a asp-area="" asp-controller="Donor" asp-action="Login">Увійти!</a></p>
+            </div>
+            <div class="mb-3 ">
+                <label for="inputSerName" class="form-label">Прізвище</label>
+                <input asp-for="SerName" type="text" name="SerName" class="form-control" id="inputSerName" required>
+                <div class="invalid-feedback">
+                    Це поле необхідно заповнити!
+                </div>
+            </div>
+            <div class="mb-3 ">
+                <label for="inputName" class="form-label">Ім'я</label>
+                <input asp-for="Name" name="Name" type="text" class="form-control" id="inputName" required>
+                <div class="invalid-feedback">
+                    Це поле необхідно заповнити!
+                </div>
+            </div>
+            <div class="mb-3 ">
+                <label for="inputLastName" class="form-label">По батькові</label>
+                <input asp-for="LastName" type="text" name="LastName" class="form-control" id="inputLastName" required>
+                <div class="invalid-feedback">
+                    Це поле необхідно заповнити!
+                </div>
+            </div>
+            <div class="mb-3">
+                <label for="sexes" class="form-label">Стать</label>
+                @if (Model != null)
+                {
+                    <select class="form-select" aria-label="Вибери зі списку" id="SexId" name="SexId">
+                        <option value="">Вибери зі списку</option>
+                        @foreach (var item in Model.Sexes)
+                        {
+                            <option value="@item.Id">@item.Name</option>
+                        }
+                    </select>
+                }
+                <div class="invalid-feedback">
+                    Це поле необхідно заповнити!
+                </div>
+            </div>
+
+            <div class="mb-3 ">
+                <label for="bloodTypes" class="form-label">Група крові</label>
+                @if (Model != null)
+                {
+                    <select class="form-select" aria-label="Вибери зі списку" name="BloodTypeId" id="BloodTypeId">
+                        <option value="">Вибери зі списку</option>
+                        @{
+                            @foreach (var item in Model.BloodTypes)
+                            {
+                                <option value="@item.Id">@item.Name</option>
+                            }
+                        }
+                    </select>
+                }
+                <div class="invalid-feedback">
+                    Це поле необхідно заповнити!
+                </div>
+            </div>
+            <div class="mb-3 ">
+                <label for="inputPhone" class="form-label">Номер телефону</label>
+                <input asp-for="PhoneNumber" name="PhoneNumber" type="tel" class="form-control" id="inputPhone" required>
+                <div class="invalid-feedback">
+                    Це поле необхідно заповнити!
+                </div>
+            </div>
+            <div class="mb-3 ">
+                <label for="inputEmail" class="form-label">Електронна пошта</label>
+                <input asp-for="Email" name="Email" type="email" class="form-control" id="inputEmail" required>
+                <div class="invalid-feedback">
+                    Це поле необхідно заповнити!
+                </div>
+            </div>
+            <div class="mb-3 ">
+                <label for="inputPassword" class="form-label">Пароль</label>
+                <input asp-for="Password" name="Password" type="password" class="form-control" id="inputPassword" required>
+                <div class="invalid-feedback">
+                    Це поле необхідно заповнити!
+                </div>
+            </div>
+            <div class="mb-3 ">
+                <label for="inputPasswordRepit" class="form-label">Повторіть пароль</label>
+                <input type="password" class="form-control" id="inputPasswordRepit" required>
+                <div class="invalid-feedback">
+                    Це поле необхідно заповнити!
+                </div>
+            </div>
+            <button type="submit" class="btn btn-secondary w-100">Зареєструватися</button>
+        </form>
+    </div>
+
+    <script src="~/js/donor/form-validation.js"></script>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/main.js" asp-append-version="true"></script>
+</body>

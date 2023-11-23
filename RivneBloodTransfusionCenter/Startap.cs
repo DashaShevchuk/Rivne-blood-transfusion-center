@@ -10,6 +10,9 @@ using RivneBloodTransfusionCenter.Data.SeedData;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using RivneBloodTransfusionCenter.Data.Entities.AppUsers;
 using System.Numerics;
+using RivneBloodTransfusionCenter.Data.Features.Donor;
+using RivneBloodTransfusionCenter.Data.Interfaces.DonorInterfaces;
+using RivneBloodTransfusionCenter.Data.Services;
 
 namespace RivneBloodTransfusionCenter
 {
@@ -32,6 +35,9 @@ namespace RivneBloodTransfusionCenter
             services.AddIdentity<DbUser, DbRole>(options => options.Stores.MaxLengthForKeys = 128)
                 .AddEntityFrameworkStores<EfContext>()
                 .AddDefaultTokenProviders();
+
+            services.AddTransient<IDonorQueries, DonorQueries>();
+            services.AddTransient<IDonorService, DonorService>();
 
             services.AddControllersWithViews();
         }

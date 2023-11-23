@@ -23,11 +23,6 @@ namespace RivneBloodTransfusionCenter.Controllers
             this.signInManager = signInManager;
         }
         [HttpGet]
-        public IActionResult Login()
-        {
-            return View();
-        }
-        [HttpGet]
         public IActionResult Registration()
         {
             RegistrationViewModel model = donorService.GetRegistrationData();
@@ -66,6 +61,39 @@ namespace RivneBloodTransfusionCenter.Controllers
             {
                 return View(model);
             }
+        }
+        [HttpGet]
+        public IActionResult Login()
+        {
+            return View();
+        }
+        [HttpPost]
+        public async Task<IActionResult> Login(LoginViewModel model)
+        {
+            var user = await userManager.FindByEmailAsync(model.Email);
+            if (user == null)
+            {
+                return NotFound();
+            }
+            var result = await signInManager.PasswordSignInAsync(user, model.Password, false, false);
+            if (result.Succeeded)
+            {
+                if (result.IsLockedOut)
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    await signInManager.SignInAsync(user, isPersistent: false);
+                    return RedirectToAction("HomePage", "Donor");
+                }
+            }
+            return View(model);
+        }
+        [HttpGet]
+        public IActionResult HomePage()
+        {
+            return View();
         }
     }
 }

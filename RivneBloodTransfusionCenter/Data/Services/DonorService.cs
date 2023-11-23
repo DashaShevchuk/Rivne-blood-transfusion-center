@@ -5,6 +5,7 @@ namespace RivneBloodTransfusionCenter.Data.Services
 {
     public class DonorService:IDonorService
     {
+        //тут реалізація методів
         private readonly IDonorQueries donorQueries;
         public DonorService(IDonorQueries donorQueries)
         {

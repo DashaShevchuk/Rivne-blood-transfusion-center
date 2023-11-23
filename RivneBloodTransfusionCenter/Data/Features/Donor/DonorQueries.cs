@@ -6,6 +6,7 @@ namespace RivneBloodTransfusionCenter.Data.Features.Donor
 {
     public class DonorQueries : IDonorQueries
     {
+        //тут тільки get запити
         private readonly EfContext context;
 
         public DonorQueries(EfContext context)

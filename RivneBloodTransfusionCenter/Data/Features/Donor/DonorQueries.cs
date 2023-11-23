@@ -14,12 +14,12 @@ namespace RivneBloodTransfusionCenter.Data.Features.Donor
         }
         public IEnumerable<BloodType> GetBloodTypes()
         {
-            return context.BloodTypes;
+            return context.BloodTypes.ToList();
         }
 
         public IEnumerable<Sex> GetSexes()
         {
-            return context.Sexes;
+            return context.Sexes.ToList();
         }
     }
 }

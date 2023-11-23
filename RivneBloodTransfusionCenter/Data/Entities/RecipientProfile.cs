@@ -17,9 +17,6 @@ namespace RivneBloodTransfusionCenter.Data.Entities
         public int SicknessId { get; set; }
         public virtual Sickness Sickness { get; set; }
 
-        public int SexId { get; set; }
-        public virtual Sex Sex { get; set; }
-
         public int RequiredNumberOfDonors { get; set; }
 
         public string Description { get; set; }

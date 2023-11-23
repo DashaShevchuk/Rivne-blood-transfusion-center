@@ -1,15 +1,26 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using RivneBloodTransfusionCenter.Data.Entities;
+using RivneBloodTransfusionCenter.Data.Entities.AppUsers;
 using RivneBloodTransfusionCenter.Data.Interfaces.DonorInterfaces;
-using RivneBloodTransfusionCenter.ViewModels;
+using RivneBloodTransfusionCenter.ViewModels.Donor;
+using System;
 
 namespace RivneBloodTransfusionCenter.Controllers
 {
     public class DonorController : Controller
     {
         private readonly IDonorService donorService;
-        public DonorController(IDonorService donorService) 
+        private readonly UserManager<DbUser> userManager;
+        private readonly SignInManager<DbUser> signInManager;
+        public DonorController(IDonorService donorService,
+                               UserManager<DbUser> userManager,
+                               SignInManager<DbUser> signInManager)
         {
             this.donorService = donorService;
+            this.userManager = userManager;
+            this.signInManager = signInManager;
         }
         [HttpGet]
         public IActionResult Login()
@@ -19,8 +30,42 @@ namespace RivneBloodTransfusionCenter.Controllers
         [HttpGet]
         public IActionResult Registration()
         {
-            DonorRegistrationViewModel model = donorService.GetRegistrationData();
+            RegistrationViewModel model = donorService.GetRegistrationData();
             return View(model);
+        }
+        [HttpPost]
+        public async Task<IActionResult> Registration(RegistrationViewModel model)
+        {
+            var roleName = "Donor";
+
+            DonorProfile donorProfile = new()
+            {
+                BloodTypeId = model.BloodTypeId,
+            };
+
+            var user = new DbUser()
+            {
+                Email = model.Email,
+                Name= model.Name,
+                SerName=model.SerName,
+                LastName=model.LastName,
+                UserName = model.Email,
+                PhoneNumber = model.PhoneNumber,
+                SexId = model.SexId,
+                DonorProfile = donorProfile
+            };
+
+            var result = await userManager.CreateAsync(user, model.Password);
+            result = userManager.AddToRoleAsync(user, roleName).Result;
+            if (result.Succeeded)
+            {
+                await signInManager.SignInAsync(user, false);
+                return RedirectToAction("Login", "Donor");
+            }
+            else
+            {
+                return View(model);
+            }
         }
     }
 }

@@ -1,9 +1,9 @@
-﻿using RivneBloodTransfusionCenter.ViewModels;
+﻿using RivneBloodTransfusionCenter.ViewModels.Donor;
 
 namespace RivneBloodTransfusionCenter.Data.Interfaces.DonorInterfaces
 {
     public interface IDonorService
     {
-        public DonorRegistrationViewModel GetRegistrationData();
+        public RegistrationViewModel GetRegistrationData();
     }
 }

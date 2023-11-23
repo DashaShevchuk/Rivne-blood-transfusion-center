@@ -5,7 +5,7 @@
     top: 10vh;
     left: 0vh;
     border-style: solid;
-    border-width: 70vh 0 70vh 50vh;
+    border-width: 75vh 0 75vh 50vh;
     border-color: transparent transparent transparent #008374;
     opacity: 20%;
     z-index: -1;
@@ -18,7 +18,7 @@
     top: 10vh;
     left: 0vh;
     border-style: solid;
-    border-width: 60vh 0 60vh 40vh;
+    border-width: 65vh 0 65vh 40vh;
     border-color: transparent transparent transparent #008374;
     opacity: 50%;
     z-index: -1;
@@ -28,7 +28,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 150vh;
+    height: 160vh;
     width: 100vh;
     z-index: 100;
 }

@@ -70,6 +70,7 @@ namespace RivneBloodTransfusionCenter.Data.SeedData
                         SerName="Hruhorovich",
                         LastName="Shevchenko",
                         Email = "admin@gmail.com",
+                        SexId=1,
                         AdminProfile = adminProfile
                     };
 
@@ -126,7 +127,7 @@ namespace RivneBloodTransfusionCenter.Data.SeedData
                         Name = "Четверта негативна, AB(IV)Rh(-)"
                     };
 
-                    await context.BloodTypes.AddRangeAsync(bloodType1, bloodType2, bloodType3, bloodType4, bloodType5, bloodType6, bloodType7, bloodType8, bloodType9);
+                    await context.BloodTypes.AddRangeAsync(bloodType1, bloodType2, bloodType3, bloodType4, bloodType5, bloodType6, bloodType7, bloodType8);
                     await context.SaveChangesAsync();
                 }
             }

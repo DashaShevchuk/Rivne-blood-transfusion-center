@@ -1,5 +1,5 @@
 ﻿using RivneBloodTransfusionCenter.Data.Interfaces.DonorInterfaces;
-using RivneBloodTransfusionCenter.ViewModels;
+using RivneBloodTransfusionCenter.ViewModels.Donor;
 
 namespace RivneBloodTransfusionCenter.Data.Services
 {
@@ -11,9 +11,9 @@ namespace RivneBloodTransfusionCenter.Data.Services
             this.donorQueries = donorQueries;
         }
 
-        public DonorRegistrationViewModel GetRegistrationData()
+        public RegistrationViewModel GetRegistrationData()
         {
-            return new DonorRegistrationViewModel { BloodTypes = donorQueries.GetBloodTypes(), Sexes = donorQueries.GetSexes() };
+            return new RegistrationViewModel { BloodTypes = donorQueries.GetBloodTypes(), Sexes = donorQueries.GetSexes() };
         }
     }
 }

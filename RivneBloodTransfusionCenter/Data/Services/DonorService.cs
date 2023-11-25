@@ -34,7 +34,7 @@ namespace RivneBloodTransfusionCenter.Data.Services
             {
                 return HttpStatusCode.NotFound;
             }
-            var result = await signInManager.PasswordSignInAsync(user, model.Password, false, false);
+            var result = await signInManager.PasswordSignInAsync(user, model.Password, model.RememberMe, false);
             if (result.Succeeded)
             {
                 if (result.IsLockedOut)
@@ -43,11 +43,17 @@ namespace RivneBloodTransfusionCenter.Data.Services
                 }
                 else
                 {
-                    await signInManager.SignInAsync(user, isPersistent: false);
+                    await signInManager.SignInAsync(user, model.RememberMe);
                     return HttpStatusCode.OK;
                 }
             }
             return HttpStatusCode.BadRequest;
+        }
+
+        public async Task<HttpStatusCode> Logout()
+        {
+            await signInManager.SignOutAsync();
+            return HttpStatusCode.OK;
         }
 
         public async Task<HttpStatusCode> Registration(RegistrationViewModel model)

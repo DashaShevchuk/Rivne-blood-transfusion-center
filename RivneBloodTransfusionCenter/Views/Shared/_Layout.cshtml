@@ -25,9 +25,18 @@
                     <li>
                         <a asp-area="" asp-controller="Home" asp-action="Request">Потрібні донори?</a>
                     </li>
-                    <li>
-                        <a asp-area="" asp-controller="Donor" asp-action="Login">Кабінет донора</a>
-                    </li>
+                    @if (User.IsInRole("Donor"))
+                    {
+                        <li>
+                            <a asp-area="" asp-controller="Donor" asp-action="HomePage">Кабінет донора</a>
+                        </li>
+                    }
+                    else
+                    {
+                        <li>
+                            <a asp-area="" asp-controller="Donor" asp-action="Login">Кабінет донора</a>
+                        </li>
+                    }
                 </ul>
                 @*<partial name="_LoginPartial" />*@
             </nav>

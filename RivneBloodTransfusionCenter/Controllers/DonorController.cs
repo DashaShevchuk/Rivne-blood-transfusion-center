@@ -17,9 +17,15 @@ namespace RivneBloodTransfusionCenter.Controllers
     public class DonorController : Controller
     {
         private readonly IDonorService donorService;
-        public DonorController(IDonorService donorService)
+        private readonly UserManager<DbUser> userManager;
+        private readonly SignInManager<DbUser> signInManager;
+        public DonorController(IDonorService donorService,
+                               UserManager<DbUser> userManager,
+                               SignInManager<DbUser> signInManager)
         {
             this.donorService = donorService;
+            this.userManager= userManager;
+            this.signInManager= signInManager;
         }
         [AllowAnonymous]
         [HttpGet]
@@ -52,15 +58,28 @@ namespace RivneBloodTransfusionCenter.Controllers
         [HttpPost]
         public async Task<IActionResult> Login(LoginViewModel model)
         {
-            HttpStatusCode loginResult = await donorService.Login(model);
-            if (loginResult == HttpStatusCode.OK)
+            var user = await userManager.FindByEmailAsync(model.Email);
+            if (user == null)
             {
-                return RedirectToAction("HomePage", "Donor");
+                TempData["ErrorMessage"] = "Користувача не знайдено";
+                return RedirectToAction("Login");
             }
-            else
+            var result = await signInManager.PasswordSignInAsync(user, model.Password, model.RememberMe, false);
+            if (result.Succeeded)
             {
-                return BadRequest();
+                if (result.IsLockedOut)
+                {
+                    TempData["ErrorMessage"] = "Цей акаунт заблоковано";
+                    return RedirectToAction("Login");
+                }
+                else
+                {
+                    await signInManager.SignInAsync(user, model.RememberMe);
+                    return RedirectToAction("HomePage", "Donor");
+                }
             }
+            TempData["ErrorMessage"] = "Неправильний пароль";
+            return RedirectToAction("Login");
         }
         [HttpPost]
         public async Task<IActionResult> Logout()

@@ -27,29 +27,6 @@ namespace RivneBloodTransfusionCenter.Data.Services
             return new RegistrationViewModel { BloodTypes = donorQueries.GetBloodTypes(), Sexes = donorQueries.GetSexes() };
         }
 
-        public async Task<HttpStatusCode> Login(LoginViewModel model)
-        {
-            var user = await userManager.FindByEmailAsync(model.Email);
-            if (user == null)
-            {
-                return HttpStatusCode.NotFound;
-            }
-            var result = await signInManager.PasswordSignInAsync(user, model.Password, model.RememberMe, false);
-            if (result.Succeeded)
-            {
-                if (result.IsLockedOut)
-                {
-                    return HttpStatusCode.NotFound;
-                }
-                else
-                {
-                    await signInManager.SignInAsync(user, model.RememberMe);
-                    return HttpStatusCode.OK;
-                }
-            }
-            return HttpStatusCode.BadRequest;
-        }
-
         public async Task<HttpStatusCode> Logout()
         {
             await signInManager.SignOutAsync();

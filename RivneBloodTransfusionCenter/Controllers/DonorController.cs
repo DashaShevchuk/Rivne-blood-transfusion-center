@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using RivneBloodTransfusionCenter.Data.Entities;
@@ -6,23 +8,33 @@ using RivneBloodTransfusionCenter.Data.Entities.AppUsers;
 using RivneBloodTransfusionCenter.Data.Interfaces.DonorInterfaces;
 using RivneBloodTransfusionCenter.ViewModels.Donor;
 using System;
+using System.Data;
 using System.Net;
 
 namespace RivneBloodTransfusionCenter.Controllers
 {
+    [Authorize(Roles = "Donor")]
     public class DonorController : Controller
     {
         private readonly IDonorService donorService;
-        public DonorController(IDonorService donorService)
+        private readonly UserManager<DbUser> userManager;
+        private readonly SignInManager<DbUser> signInManager;
+        public DonorController(IDonorService donorService,
+                               UserManager<DbUser> userManager,
+                               SignInManager<DbUser> signInManager)
         {
             this.donorService = donorService;
+            this.userManager= userManager;
+            this.signInManager= signInManager;
         }
+        [AllowAnonymous]
         [HttpGet]
         public IActionResult Registration()
         {
             RegistrationViewModel model = donorService.GetRegistrationData();
             return View(model);
         }
+        [AllowAnonymous]
         [HttpPost]
         public async Task<IActionResult> Registration(RegistrationViewModel model)
         {
@@ -36,28 +48,58 @@ namespace RivneBloodTransfusionCenter.Controllers
                 return BadRequest();
             }
         }
+        [AllowAnonymous]
         [HttpGet]
         public IActionResult Login()
         {
             return View();
         }
+        [AllowAnonymous]
         [HttpPost]
         public async Task<IActionResult> Login(LoginViewModel model)
         {
-            HttpStatusCode loginResult = await donorService.Login(model);
-            if (loginResult == HttpStatusCode.OK)
+            var user = await userManager.FindByEmailAsync(model.Email);
+            if (user == null)
             {
-                return RedirectToAction("HomePage", "Donor");
+                TempData["ErrorMessage"] = "Користувача не знайдено";
+                return RedirectToAction("Login");
+            }
+            var result = await signInManager.PasswordSignInAsync(user, model.Password, model.RememberMe, false);
+            if (result.Succeeded)
+            {
+                if (result.IsLockedOut)
+                {
+                    TempData["ErrorMessage"] = "Цей акаунт заблоковано";
+                    return RedirectToAction("Login");
+                }
+                else
+                {
+                    await signInManager.SignInAsync(user, model.RememberMe);
+                    return RedirectToAction("HomePage", "Donor");
+                }
+            }
+            TempData["ErrorMessage"] = "Неправильний пароль";
+            return RedirectToAction("Login");
+        }
+        [HttpPost]
+        public async Task<IActionResult> Logout()
+        {
+            HttpStatusCode logoutResult = await donorService.Logout();
+            if (logoutResult == HttpStatusCode.OK)
+            {
+                return RedirectToAction("Index", "Home");
             }
             else
             {
                 return BadRequest();
             }
         }
+        [Authorize]
         [HttpGet]
         public IActionResult HomePage()
         {
-            return View();
+           return View();
         }
+
     }
 }

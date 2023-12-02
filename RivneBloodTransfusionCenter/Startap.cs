@@ -36,6 +36,12 @@ namespace RivneBloodTransfusionCenter
                 .AddEntityFrameworkStores<EfContext>()
                 .AddDefaultTokenProviders();
 
+            services.ConfigureApplicationCookie(options =>
+            {
+                options.ExpireTimeSpan = TimeSpan.FromDays(1);
+                options.SlidingExpiration = true;
+            });
+
             services.AddTransient<IDonorQueries, DonorQueries>();
             services.AddTransient<IDonorService, DonorService>();
 

@@ -7,7 +7,7 @@ namespace RivneBloodTransfusionCenter.Data.Interfaces.DonorInterfaces
     {
         public RegistrationViewModel GetRegistrationData();
         public Task<HttpStatusCode> Registration(RegistrationViewModel model);
-        public Task<HttpStatusCode> Login(LoginViewModel model);
+        public Task<HttpStatusCode> Logout();
 
     }
 }

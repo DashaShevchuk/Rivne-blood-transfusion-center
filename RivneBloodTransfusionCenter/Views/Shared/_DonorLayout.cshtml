@@ -11,6 +11,8 @@
     <script src="https://kit.fontawesome.com/2f492529ea.js" crossorigin="anonymous"></script>
 </head>
 <body>
+    <div class="shape1"></div>
+    <div class="shape2"></div>
     <nav class="navbar" id="navbar">
         <div class="nav-links">
             <ul>
@@ -38,8 +40,7 @@
                                 </div>
                             </li>
                             <li><hr class="dropdown-divider"></li>
-                            <li><a class="dropdown-item" href="#">Мій профіль</a></li>
-                            <li><a class="dropdown-item" href="#">Налаштування</a></li>
+                            <li><a asp-area="" asp-controller="Donor" asp-action="Profile" class="dropdown-item">Мій профіль</a></li>
                             <li><hr class="dropdown-divider"></li>
                             <li>
                                 <form asp-controller="Donor" asp-action="Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">

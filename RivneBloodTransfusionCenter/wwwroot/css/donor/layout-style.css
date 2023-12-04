@@ -24,7 +24,6 @@
 
 body {
     min-height: 100vh;
-    background-color: var(--body-color);
     transition: var(--tran-05);
     font-family: var(--font-default);
 }
@@ -265,7 +264,7 @@ header .image-text .profession {
 
 
 .home {
-    position: absolute;
+    /*position: absolute;*/
     display: flex;
     justify-content: center;
     align-items: center;
@@ -331,4 +330,30 @@ header .image-text .profession {
 .dropdown-item {
     color: var(--sidebar-color) !important;
     font-weight: bold !important;
+}
+
+.shape1 {
+    width: 0px;
+    height: 0px;
+    position: absolute;
+    top: 0vh;
+    left: 0vh;
+    border-style: solid;
+    border-width: 50vh 0 50vh 40vh;
+    border-color: transparent transparent transparent #008374;
+    opacity: 20%;
+    z-index: -1;
+}
+
+.shape2 {
+    width: 0px;
+    height: 0px;
+    position: absolute;
+    top: 0vh;
+    left: 0vh;
+    border-style: solid;
+    border-width: 40vh 0 40vh 40vh;
+    border-color: transparent transparent transparent #008374;
+    opacity: 50%;
+    z-index: -1;
 }

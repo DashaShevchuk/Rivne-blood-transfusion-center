@@ -42,6 +42,7 @@ namespace RivneBloodTransfusionCenter
                 options.SlidingExpiration = true;
             });
 
+            services.AddTransient<IDonorCommands, DonorCommands>();
             services.AddTransient<IDonorQueries, DonorQueries>();
             services.AddTransient<IDonorService, DonorService>();
 

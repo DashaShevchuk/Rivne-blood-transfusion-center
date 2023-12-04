@@ -10,6 +10,7 @@ using RivneBloodTransfusionCenter.ViewModels.Donor;
 using System;
 using System.Data;
 using System.Net;
+using System.Security.Claims;
 
 namespace RivneBloodTransfusionCenter.Controllers
 {
@@ -100,6 +101,44 @@ namespace RivneBloodTransfusionCenter.Controllers
         {
            return View();
         }
+        [Authorize]
+        [HttpGet]
+        public IActionResult Profile()
+        {
+            string userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
 
+            if (userId != null)
+            {
+                DonorProfileViewModel donorProfile = donorService.GetDonorProfileById(userId);
+                return View(donorProfile);
+            }
+            else
+            {
+                return NotFound();
+            }
+        }
+        [Authorize]
+        [HttpPost]
+        public IActionResult EditProfile(DonorProfileViewModel model)
+        {
+            string userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+
+            if (userId != null)
+            {
+                HttpStatusCode editProfileResult = donorService.EditProfile(model, userId);
+                if (editProfileResult == HttpStatusCode.OK)
+                {
+                    return RedirectToAction("Profile", "Donor");
+                }
+                else
+                {
+                    return BadRequest();
+                }
+            }
+            else
+            {
+                return NotFound();
+            }
+        }
     }
 }

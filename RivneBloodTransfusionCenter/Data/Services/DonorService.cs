@@ -7,19 +7,53 @@ using System.Net;
 
 namespace RivneBloodTransfusionCenter.Data.Services
 {
-    public class DonorService:IDonorService
+    public class DonorService : IDonorService
     {
         //тут реалізація методів
         private readonly IDonorQueries donorQueries;
+        private readonly IDonorCommands donorCommands;
         private readonly UserManager<DbUser> userManager;
         private readonly SignInManager<DbUser> signInManager;
         public DonorService(IDonorQueries donorQueries,
-                               UserManager<DbUser> userManager,
-                               SignInManager<DbUser> signInManager)
+                            IDonorCommands donorCommands,
+                            UserManager<DbUser> userManager,
+                            SignInManager<DbUser> signInManager)
         {
             this.donorQueries = donorQueries;
+            this.donorCommands = donorCommands;
             this.userManager = userManager;
             this.signInManager = signInManager;
+        }
+
+        public HttpStatusCode EditProfile(DonorProfileViewModel model, string userId)
+        {
+            var user = donorQueries.GetDonorById(userId);
+            if (user == null)
+            {
+                return HttpStatusCode.NotFound;
+            }
+
+           donorCommands.UpdateUserProfile(user, model);
+           
+            return HttpStatusCode.OK;
+        }
+
+        public DonorProfileViewModel GetDonorProfileById(string userId)
+        {
+            var donor = donorQueries.GetDonorById(userId);
+
+            DonorProfileViewModel donorProfile = new()
+            {
+                Name = donor.Name,
+                SerName = donor.SerName,
+                LastName = donor.LastName,
+                PhoneNumber = donor.PhoneNumber,
+                SexId = donor.SexId,
+                BloodTypeId = donor.DonorProfile.BloodTypeId,
+                Sexes = donorQueries.GetSexes(),
+                BloodTypes = donorQueries.GetBloodTypes()
+            };
+            return donorProfile;
         }
 
         public RegistrationViewModel GetRegistrationData()

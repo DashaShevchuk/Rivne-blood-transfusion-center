@@ -117,6 +117,7 @@ namespace RivneBloodTransfusionCenter.Controllers
                 return NotFound();
             }
         }
+
         [Authorize]
         [HttpPost]
         public IActionResult EditProfile(DonorProfileViewModel model)
@@ -138,6 +139,27 @@ namespace RivneBloodTransfusionCenter.Controllers
             else
             {
                 return NotFound();
+            }
+        }
+        [Authorize]
+        [HttpGet]
+        public IActionResult Donations()
+        {
+            AddDonationViewModel model = donorService.GetAddDonationData();
+            return View(model);
+        }
+        [Authorize]
+        [HttpPost]
+        public IActionResult AddDonation(AddDonationViewModel model)
+        {
+            HttpStatusCode addDonationResult = donorService.AddDonation(model);
+            if (addDonationResult == HttpStatusCode.OK)
+            {
+                return RedirectToAction("Donations", "Donor");
+            }
+            else
+            {
+                return BadRequest();
             }
         }
     }

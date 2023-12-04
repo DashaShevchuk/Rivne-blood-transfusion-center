@@ -7,6 +7,8 @@ namespace RivneBloodTransfusionCenter.Data.Interfaces.DonorInterfaces
     {
         RegistrationViewModel GetRegistrationData();
 
+        AddDonationViewModel GetAddDonationData();
+
         Task<HttpStatusCode> Registration(RegistrationViewModel model);
         
         Task<HttpStatusCode> Logout();
@@ -15,5 +17,6 @@ namespace RivneBloodTransfusionCenter.Data.Interfaces.DonorInterfaces
 
         HttpStatusCode EditProfile(DonorProfileViewModel model, string userId);
 
+        HttpStatusCode AddDonation(AddDonationViewModel model);
     }
 }

@@ -25,6 +25,16 @@ namespace RivneBloodTransfusionCenter.Data.Features.Donor
             return context.BloodTypes.ToList();
         }
 
+        public IEnumerable<Donation> GetDonations()
+        {
+            return context.Donations.ToList();
+        }
+
+        public IEnumerable<DonationType> GetDonationTypes()
+        {
+           return context.DonationTypes.ToList();
+        }
+
         public DbUser GetDonorById(string userId)
         {
             return context.Users.Include(x => x.DonorProfile).FirstOrDefault(x => x.Id == userId);

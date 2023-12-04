@@ -1,0 +1,147 @@
+﻿@model RivneBloodTransfusionCenter.ViewModels.Donor.AddDonationViewModel;
+@{
+    Layout = "~/Views/Shared/_DonorLayout.cshtml";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=1,initial-scale=1,user-scalable=1" />
+    <title>@ViewData["Title"] - UI</title>
+
+    <link rel="stylesheet" type="text/css" href="~/css/donor/donations-style.css" />
+    <link rel="stylesheet" type="text/css" href="~/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/UI.styles.css" asp-append-version="true" />
+</head>
+<body>
+    <div class="form-container">
+        <div class="modal-controller">
+            <div class="d-flex row w-100 justify-content-between">
+                <div class="col">
+                    <h2 class="fw-bold">Донації</h2>
+                </div>
+                <div class="col d-flex justify-content-end">
+                    <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#addDonation">
+                        Додати
+                    </button>
+                </div>
+            </div>
+
+            <br />​<hr />​​​​​​​​​​​​​​​​​​​<br />
+            <div class="modal fade" id="addDonation" tabindex="-1" aria-labelledby="addDonation" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="staticBackdropLabel">Додати донацію</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <form class="needs-validation" novalidate method="post" asp-controller="Donor" asp-action="AddDonation">
+                                <div>
+                                    <label for="bloodCenter" class="form-label">Центр крові</label>
+                                    <input type="text" asp-for="DonationCenter" class="form-control" id="bloodCenter" value="Рівненська область, Рівненський обласний центр служби крові" readonly>
+                                    <div class="invalid-feedback">
+                                        Це поле необхідно заповнити!
+                                    </div>
+                                </div>
+                                <div>
+                                    <label for="DonationTypeId" class="form-label">Тип донації</label>
+                                    @if (Model != null)
+                                    {
+                                        <select class="form-select" aria-label="Вибери зі списку" id="DonationTypeId" name="DonationTypeId" required>
+                                            <option value="">Вибери зі списку</option>
+                                            @foreach (var item in Model.DonationTypes)
+                                            {
+                                                <option value="@item.Id">@item.Name</option>
+                                            }
+                                        </select>
+                                    }
+                                    <div class="invalid-feedback">
+                                        Це поле необхідно заповнити!
+                                    </div>
+                                </div>
+                                <div>
+                                    <label for="Date" class="form-label">Дата</label>
+                                    <input type="date" asp-for="Date" class="form-control" required />
+                                    <div class="invalid-feedback">
+                                        Це поле необхідно заповнити!
+                                    </div>
+                                </div>
+                                <div class="d-flex justify-content-center">
+                                    <button type="submit" class="btn btn-secondary w-75 m-2">Зберегти</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="table-div">
+            <table class="table table-striped table-hover">
+                <thead>
+                    <tr>
+                        <th scope="col">Дата</th>
+                        <th scope="col">Центр крові</th>
+                        <th scope="col">Тип</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model != null)
+                    {
+                        @foreach (var item in Model.Donations)
+                        {
+                            <tr>
+                                <td>@item.Date</td>
+                                <td>@item.DonationCenter</td>
+                                <td>@item.DonationType.Name</td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        if (typeof Modernizr !== 'undefined' && Modernizr.inputtypes.date === false) {
+            $('input[type=date]').datepicker({
+                format: 'yyyy-mm-dd'
+            });
+        }
+
+        $('input[type=date]').on('change', function (event) {
+            var dateString = event.target.value.split('-');
+            var dateArray = [dateString[1], '/', dateString[2], '/', dateString[0], ' 00:00:00 EST'];
+            var dateObj = new Date(dateArray.join(''));
+            dateObj.setHours(23);
+            dateObj.setMinutes(59);
+            dateObj.setSeconds(60);
+            dateObj.setMilliseconds(0);
+
+            console.log(dateString, dateArray);
+            console.log(dateObj.getTime(), dateObj.toUTCString());
+        });
+
+        (() => {
+            'use strict'
+
+            const forms = document.querySelectorAll('.needs-validation')
+
+            Array.from(forms).forEach(form => {
+                form.addEventListener('submit', event => {
+                    if (!form.checkValidity()) {
+                        event.preventDefault()
+                        event.stopPropagation()
+                    }
+
+                    form.classList.add('was-validated')
+                }, false)
+            })
+        })();
+    </script>
+</body>
+</html>

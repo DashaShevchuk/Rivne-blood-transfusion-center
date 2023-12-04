@@ -1,0 +1,19 @@
+﻿.modal-controller {
+    width: 160vh;
+}
+.form-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction:column;
+    z-index: 100;
+    height:100vh;
+}
+button {
+    background-color: #f85a40 !important;
+    border-color: #F0583F !important;
+    font-family: "Open Sans", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji" !important;
+}
+.table-div{
+    width:160vh;
+}

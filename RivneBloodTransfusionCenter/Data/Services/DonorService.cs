@@ -25,6 +25,19 @@ namespace RivneBloodTransfusionCenter.Data.Services
             this.signInManager = signInManager;
         }
 
+        public HttpStatusCode AddDonation(AddDonationViewModel model)
+        {
+            var newDonation = new Donation()
+            {
+                TypeId = model.DonationTypeId,
+                Date = model.Date,
+                DonationCenter=model.DonationCenter,
+            };
+            donorCommands.AddDonation(newDonation);
+
+            return HttpStatusCode.OK;
+        }
+
         public HttpStatusCode EditProfile(DonorProfileViewModel model, string userId)
         {
             var user = donorQueries.GetDonorById(userId);
@@ -33,9 +46,20 @@ namespace RivneBloodTransfusionCenter.Data.Services
                 return HttpStatusCode.NotFound;
             }
 
-           donorCommands.UpdateUserProfile(user, model);
-           
+            donorCommands.UpdateUserProfile(user, model);
+
             return HttpStatusCode.OK;
+        }
+
+        public AddDonationViewModel GetAddDonationData()
+        {
+            AddDonationViewModel model = new()
+            {
+                DonationTypes = donorQueries.GetDonationTypes(),
+                Donations= donorQueries.GetDonations(),
+            };
+
+            return model;
         }
 
         public DonorProfileViewModel GetDonorProfileById(string userId)

@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using RivneBloodTransfusionCenter.Data.EfDbContext;
+using RivneBloodTransfusionCenter.Data.Entities;
 using RivneBloodTransfusionCenter.Data.Entities.AppUsers;
 using RivneBloodTransfusionCenter.Data.Interfaces.DonorInterfaces;
 using RivneBloodTransfusionCenter.ViewModels.Donor;
@@ -21,34 +22,15 @@ namespace RivneBloodTransfusionCenter.Data.Features.Donor
             this.context = context;
             this.userManager = userManager;
         }
+
+        public void AddDonation(Donation donation)
+        {
+            context.Donations.Add(donation);
+            context.SaveChanges();
+        }
+
         public void UpdateUserProfile(DbUser user, DonorProfileViewModel model)
         {
-            //var user = donorQueries.GetDonorById(userId);
-
-            //user.Name=model.Name;
-            //user.SerName=model.SerName;
-            //user.LastName=model.LastName;
-            //user.PhoneNumber=model.PhoneNumber;
-            //user.SexId=model.SexId;
-            //user.DonorProfile.BloodTypeId=model.BloodTypeId;
-
-            //context.SaveChangesAsync
-            //if (user != null)
-            //{
-            //    user.Name = model.Name;
-            //    user.SerName = model.SerName;
-            //    user.LastName = model.LastName;
-            //    user.PhoneNumber = model.PhoneNumber;
-            //    user.SexId = model.SexId;
-
-            //    if (user.DonorProfile != null)
-            //    {
-            //        user.DonorProfile.BloodTypeId = model.BloodTypeId;
-            //    }
-
-            //    context.SaveChanges(); // Note: Use SaveChanges instead of SaveChangesAsync if not awaited
-            //}
-
             if(user.Name != model.Name)
             {
                 user.Name = model.Name;

@@ -58,26 +58,30 @@ namespace RivneBloodTransfusionCenter.Data.SeedData
             {
                 if (!context.AdminProfiles.Any())
                 {
-                    AdminProfile adminProfile = new ()
+                    DbUser user1 = new()
                     {
-                        Id = Guid.NewGuid().ToString(),
-                    };
-                    DbUser user1 = new ()
-                    {
-                        Id = adminProfile.Id,
                         UserName = "Admin",
                         Name = "Taras",
-                        SerName="Hruhorovich",
-                        LastName="Shevchenko",
+                        SerName = "Hruhorovich",
+                        LastName = "Shevchenko",
+                        DateOfBirth="28.11.2003",
                         Email = "admin@gmail.com",
-                        SexId=1,
-                        AdminProfile = adminProfile
+                        SexId = 1,
                     };
 
                     await userManager.CreateAsync(user1, "Qwerty-1");
                     await userManager.AddToRoleAsync(user1, "Admin");
+                    await context.SaveChangesAsync();
 
+                    AdminProfile adminProfile = new()
+                    {
+                        Id = Guid.NewGuid().ToString(),
+                    };
+
+                    user1.AdminProfile = adminProfile;
                     await context.AdminProfiles.AddAsync(adminProfile);
+                    await context.SaveChangesAsync();
+
                     await context.SaveChangesAsync();
                 }
             }

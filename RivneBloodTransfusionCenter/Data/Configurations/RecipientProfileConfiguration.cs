@@ -14,7 +14,7 @@ namespace RivneBloodTransfusionCenter.Data.Configurations
 
             builder.HasOne(e => e.DonationType)
              .WithMany(x => x.RecipientProfiles)
-             .HasForeignKey(e => e.BloodTypeId);
+             .HasForeignKey(e => e.DonationTypeId);
 
             builder.HasOne(e => e.BloodType)
             .WithMany(x => x.RecipientProfile)

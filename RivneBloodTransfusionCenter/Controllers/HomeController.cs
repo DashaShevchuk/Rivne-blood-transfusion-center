@@ -1,16 +1,21 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using RivneBloodTransfusionCenter.Data.Interfaces.DonorInterfaces;
+using RivneBloodTransfusionCenter.Data.Interfaces.HomeInterfaces;
+using RivneBloodTransfusionCenter.Data.Services;
 using RivneBloodTransfusionCenter.Models;
+using RivneBloodTransfusionCenter.ViewModels.Home;
 using System.Diagnostics;
+using System.Net;
 
 namespace RivneBloodTransfusionCenter.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
-
-        public HomeController(ILogger<HomeController> logger)
+        private readonly IHomeService homeService;
+        public HomeController(IHomeService homeService)
         {
-            _logger = logger;
+            this.homeService = homeService;
         }
 
         public IActionResult Index()
@@ -22,10 +27,27 @@ namespace RivneBloodTransfusionCenter.Controllers
         {
             return View();
         }
-
-        public IActionResult Request()
+        [AllowAnonymous]
+        [HttpGet]
+        public IActionResult RecipientRegistration()
         {
-            return View();
+            RegistrationViewModel model = homeService.GetRegistrationData();
+            return View(model);
+        }
+
+        [AllowAnonymous]
+        [HttpPost]
+        public async Task<IActionResult> RegisterRecipient(RegistrationViewModel model)
+        {
+            HttpStatusCode registrationResult = await homeService.Registration(model);
+            if (registrationResult == HttpStatusCode.OK)
+            {
+                return RedirectToAction("RecipientRegistration", "Home");
+            }
+            else
+            {
+                return BadRequest();
+            }
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

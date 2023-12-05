@@ -23,12 +23,12 @@
                         <a asp-area="" asp-controller="Home" asp-action="Centers">Де здати кров</a>
                     </li>
                     <li>
-                        <a asp-area="" asp-controller="Home" asp-action="Request">Потрібні донори?</a>
+                        <a asp-area="" asp-controller="Home" asp-action="RecipientRegistration">Потрібні донори?</a>
                     </li>
                     @if (User.IsInRole("Donor"))
                     {
                         <li>
-                            <a asp-area="" asp-controller="Donor" asp-action="HomePage">Кабінет донора</a>
+                            <a asp-area="" asp-controller="Donor" asp-action="WhereDonate">Кабінет донора</a>
                         </li>
                     }
                     else
@@ -38,11 +38,7 @@
                         </li>
                     }
                 </ul>
-                @*<partial name="_LoginPartial" />*@
             </nav>
-
-           @* <i class="mobile-nav-toggle mobile-nav-show bi bi-list"></i>
-            <i class="mobile-nav-toggle mobile-nav-hide d-none bi bi-x"></i>*@
         </div>
     </header>
 
@@ -52,6 +48,7 @@
         </main>
     </div>
 
+    <script src="https://kit.fontawesome.com/2f492529ea.js" crossorigin="anonymous"></script>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/main.js" asp-append-version="true"></script>

@@ -19,15 +19,13 @@ namespace RivneBloodTransfusionCenter.Data.Entities
 
         public int RequiredNumberOfDonors { get; set; }
 
+        public string DonationCenter { get; set; }
+
         public string Description { get; set; }
 
         public string IsForYourself { get; set; }
 
         public string ContactPerson { get; set; }
-
-        public string Phone { get; set; }
-
-        public string Email { get; set; }
 
         public virtual DbUser User { get; set; }
     }

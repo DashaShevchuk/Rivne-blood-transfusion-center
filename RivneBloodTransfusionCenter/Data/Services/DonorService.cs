@@ -106,6 +106,7 @@ namespace RivneBloodTransfusionCenter.Data.Services
                 Name = model.Name,
                 SerName = model.SerName,
                 LastName = model.LastName,
+                DateOfBirth=model.DateOfBirth,
                 UserName = model.Email,
                 PhoneNumber = model.PhoneNumber,
                 SexId = model.SexId,

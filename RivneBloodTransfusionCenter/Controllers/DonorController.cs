@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using RivneBloodTransfusionCenter.Data.EfDbContext;
 using RivneBloodTransfusionCenter.Data.Entities;
 using RivneBloodTransfusionCenter.Data.Entities.AppUsers;
 using RivneBloodTransfusionCenter.Data.Interfaces.DonorInterfaces;
@@ -18,13 +19,16 @@ namespace RivneBloodTransfusionCenter.Controllers
     public class DonorController : Controller
     {
         private readonly IDonorService donorService;
+        private readonly EfContext context;
         private readonly UserManager<DbUser> userManager;
         private readonly SignInManager<DbUser> signInManager;
         public DonorController(IDonorService donorService,
+                               EfContext context,
                                UserManager<DbUser> userManager,
                                SignInManager<DbUser> signInManager)
         {
             this.donorService = donorService;
+            this.context = context;
             this.userManager= userManager;
             this.signInManager= signInManager;
         }
@@ -35,6 +39,7 @@ namespace RivneBloodTransfusionCenter.Controllers
             RegistrationViewModel model = donorService.GetRegistrationData();
             return View(model);
         }
+
         [AllowAnonymous]
         [HttpPost]
         public async Task<IActionResult> Registration(RegistrationViewModel model)
@@ -55,11 +60,13 @@ namespace RivneBloodTransfusionCenter.Controllers
         {
             return View();
         }
+
         [AllowAnonymous]
         [HttpPost]
         public async Task<IActionResult> Login(LoginViewModel model)
         {
-            var user = await userManager.FindByEmailAsync(model.Email);
+            //var user = await userManager.FindByEmailAsync(model.Email);
+            DbUser user = context.DonorProfiles.Select(x=>x.User).FirstOrDefault(x=>x.Email==model.Email);
             if (user == null)
             {
                 TempData["ErrorMessage"] = "Користувача не знайдено";
@@ -82,6 +89,8 @@ namespace RivneBloodTransfusionCenter.Controllers
             TempData["ErrorMessage"] = "Неправильний пароль";
             return RedirectToAction("Login");
         }
+
+        [Authorize]
         [HttpPost]
         public async Task<IActionResult> Logout()
         {

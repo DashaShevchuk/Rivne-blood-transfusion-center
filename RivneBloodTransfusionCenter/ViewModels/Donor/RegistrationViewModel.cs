@@ -10,6 +10,8 @@ namespace RivneBloodTransfusionCenter.ViewModels.Donor
 
         public string LastName { get; set; }
 
+        public string DateOfBirth { get; set; }
+
         public int SexId { get; set; }
 
         public int BloodTypeId { get; set; }

@@ -1,0 +1,33 @@
+﻿.content{
+    height:130vh;
+    width:150vh;
+    padding-top:10%;
+    display:flex;
+    justify-content:center;
+}
+h6{
+    color:grey;
+}
+.card {
+    padding:1%;
+    border: none;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+.card-text-title{
+    font-size:small;
+    color:gray;
+    font-weight:lighter;
+}
+.card-text-phone {
+    font-size: small;
+}
+.card-header{
+    background-color:white!important;
+}
+.shape1 {
+    border-width: 70vh 0 70vh 50vh;
+}
+
+.shape2 {
+    border-width: 60vh 0 60vh 40vh;
+}

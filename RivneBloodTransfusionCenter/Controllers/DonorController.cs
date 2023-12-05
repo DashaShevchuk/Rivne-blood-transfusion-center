@@ -162,5 +162,11 @@ namespace RivneBloodTransfusionCenter.Controllers
                 return BadRequest();
             }
         }
+        [Authorize]
+        [HttpGet]
+        public IActionResult WhereDonate()
+        {
+            return View();
+        }
     }
 }

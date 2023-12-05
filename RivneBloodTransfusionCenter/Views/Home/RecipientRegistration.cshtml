@@ -1,0 +1,253 @@
+﻿@model RivneBloodTransfusionCenter.ViewModels.Home.RegistrationViewModel;
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=1,initial-scale=1,user-scalable=1" />
+    <title>@ViewData["Title"] - UI</title>
+
+    <link rel="stylesheet" type="text/css" href="~/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/UI.styles.css" asp-append-version="true" />
+</head>
+<body>
+
+    <div class="shape1"></div>
+    <div class="shape2"></div>
+
+    <h1>Потрібні донори?</h1>
+    <h4 class="fw-normal">Рівненський центр переливання крові надає безоплатну допомогу в пошуку донорів крові та її компонентів. Якщо до вас звернулись від нашого імені з проханням про надання номеру банківської картки, коду чи будь-якої іншої фінансової інформації, просимо вас про це негайно повідомити.</h4>
+    <form class="needs-validation" novalidate method="post" asp-action="RegisterRecipient" asp-controller="Home">
+
+        <div class="mb-3 col">
+            <h2 class="fw-bold">Реєстрація</h2>
+            <p class="fw-normal">Щоб залишити заявку на пошук донорів, будь ласка, заповність форму нижче <span class="fw-bold">українською мовою</span>.</p>
+            <div class="col">
+                <div class="row">
+                    <div class="col">
+                        <div class="mb-3">
+                            <label for="inputSerName" class="form-label">Прізвище</label>
+                            <input asp-for="SerName" name="SerName" type="text" class="form-control" id="inputSerName" required>
+                            <div class="invalid-feedback">
+                                Це поле необхідно заповнити!
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="mb-3 ">
+                            <label for="inputName" class="form-label">Ім'я</label>
+                            <input asp-for="Name" name="Name" type="text" class="form-control" id="inputName" required>
+                            <div class="invalid-feedback">
+                                Це поле необхідно заповнити!
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="mb-3">
+                            <label for="inputLastName" class="form-label">По батькові</label>
+                            <input asp-for="LastName" name="LastName" type="text" class="form-control" id="inputLastName" required>
+                            <div class="invalid-feedback">
+                                Це поле необхідно заповнити!
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <div class="mb-3 ">
+                            <label for="DateOfBirth" class="form-label">Дата народження</label>
+                            <input type="date" asp-for="DateOfBirth" class="form-control" required />
+                            <div class="invalid-feedback">
+                                Це поле необхідно заповнити!
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="sicknesses" class="form-label">Хвороба</label>
+                            @if (Model != null)
+                            {
+                                <select class="form-select" aria-label="Вибери зі списку" id="SicknessId" name="SicknessId">
+                                    <option value="">Вибери зі списку</option>
+                                    @foreach (var item in Model.Sicknesses)
+                                    {
+                                        <option value="@item.Id">@item.Name</option>
+                                    }
+                                </select>
+                            }
+                            <div class="invalid-feedback">
+                                Це поле необхідно заповнити!
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="donations" class="form-label">Тип донації</label>
+                            @if (Model != null)
+                            {
+                                <select class="form-select" aria-label="Вибери зі списку" id="DonationTypeId" name="DonationTypeId">
+                                    <option value="">Вибери зі списку</option>
+                                    @foreach (var item in Model.DonationTypes)
+                                    {
+                                        <option value="@item.Id">@item.Name</option>
+                                    }
+                                </select>
+                            }
+                            <div class="invalid-feedback">
+                                Це поле необхідно заповнити!
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="inputPlaceOfTreatment" class="form-label">Місце лікування</label>
+                            <input asp-for="PlaceOfTreatment" name="PlaceOfTreatment" type="text" class="form-control" id="inputPlaceOfTreatment" required>
+                            <div class="invalid-feedback">
+                                Це поле необхідно заповнити!
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="mb-3">
+                            <label for="bloodtypes" class="form-label">Стать</label>
+                            @if (Model != null)
+                            {
+                                <select class="form-select" aria-label="Вибери зі списку" id="SexId" name="SexId">
+                                    <option value="">Вибери зі списку</option>
+                                    @foreach (var item in Model.Sexes)
+                                    {
+                                        <option value="@item.Id">@item.Name</option>
+                                    }
+                                </select>
+                            }
+                            <div class="invalid-feedback">
+                                Це поле необхідно заповнити!
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="bloodtypes" class="form-label">Група крові</label>
+                            @if (Model != null)
+                            {
+                                <select class="form-select" aria-label="Вибери зі списку" id="BloodTypeId" name="BloodTypeId">
+                                    <option value="">Вибери зі списку</option>
+                                    @foreach (var item in Model.BloodTypes)
+                                    {
+                                        <option value="@item.Id">@item.Name</option>
+                                    }
+                                </select>
+                            }
+                            <div class="invalid-feedback">
+                                Це поле необхідно заповнити!
+                            </div>
+                        </div>
+                        <div class="mb-3 ">
+                            <label for="bloodCenter" class="form-label">Центр крові</label>
+                            <input type="text" asp-for="DonationCenter" class="form-control" id="bloodCenter" value="Рівненська область, Рівненський обласний центр служби крові" readonly>
+                            <div class="invalid-feedback">
+                                Це поле необхідно заповнити!
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="inputRequiredNumberOfDonors" class="form-label">Необхідна кількість донорів</label>
+                            <input asp-for="RequiredNumberOfDonors" name="RequiredNumberOfDonors" type="number" class="form-control" id="inputRequiredNumberOfDonors" required>
+                            <div class="invalid-feedback">
+                                Це поле необхідно заповнити!
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="inputDescription" class="form-label">Опишіть вашу ситуацію</label>
+                    <textarea asp-for="Description" name="Description" type="text" mul class="form-control" id="inputDescription" required></textarea>
+                    <div class="invalid-feedback">
+                        Це поле необхідно заповнити!
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <div class="mb-4">
+                        <label for="inputIsForYourself" class="form-label">Шукаєте донора для себе?</label>
+                        <div class="mb-4">
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" asp-for="IsForYourself" type="radio" name="IsForYourself" id="IsForYourself" value="true">
+                                <label class="form-check-label" for="IsForYourself">Так</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" asp-for="IsForYourself" type="radio" name="IsForYourself" id="IsForYourself" value="false">
+                                <label class="form-check-label" for="IsForYourself">Ні</label>
+                            </div>
+                            <div class="invalid-feedback">
+                                Це поле необхідно заповнити!
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="inputPhoneNumber" class="form-label">Телефон</label>
+                        <input asp-for="PhoneNumber" name="PhoneNumber" type="text" class="form-control" id="inputPhoneNumber" required>
+                        <div class="invalid-feedback">
+                            Це поле необхідно заповнити!
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="mb-3">
+                        <label for="inputContactPerson" class="form-label">ПІБ контактної особи, хто ви для реципієнта</label>
+                        <input asp-for="ContactPerson" name="ContactPerson" type="text" class="form-control" id="inputContactPerson" required>
+                        <div class="invalid-feedback">
+                            Це поле необхідно заповнити!
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="inputEmail" class="form-label">Електронна адреса</label>
+                        <input asp-for="Email" name="Email" type="email" class="form-control" id="inputEmail" required>
+                        <div class="invalid-feedback">
+                            Це поле необхідно заповнити!
+                        </div>
+                    </div>
+                </div>
+                <div class="d-flex justify-content-center w-100 mb-3">
+                    <button type="submit" class="btn btn-secondary w-75" style="background-color:#f85a40">Зареєструватися</button>
+                </div>
+            </div>
+        </div>
+    </form>
+    <script src="~/js/donor/form-validation.js"></script>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/main.js" asp-append-version="true"></script>
+    <script>
+        if (typeof Modernizr !== 'undefined' && Modernizr.inputtypes.date === false) {
+            $('input[type=date]').datepicker({
+                format: 'yyyy-mm-dd'
+            });
+        }
+
+        $('input[type=date]').on('change', function (event) {
+            var dateString = event.target.value.split('-');
+            var dateArray = [dateString[1], '/', dateString[2], '/', dateString[0], ' 00:00:00 EST'];
+            var dateObj = new Date(dateArray.join(''));
+            dateObj.setHours(23);
+            dateObj.setMinutes(59);
+            dateObj.setSeconds(60);
+            dateObj.setMilliseconds(0);
+
+            console.log(dateString, dateArray);
+            console.log(dateObj.getTime(), dateObj.toUTCString());
+        });
+
+        (() => {
+            'use strict'
+
+            const forms = document.querySelectorAll('.needs-validation')
+
+            Array.from(forms).forEach(form => {
+                form.addEventListener('submit', event => {
+                    if (!form.checkValidity()) {
+                        event.preventDefault()
+                        event.stopPropagation()
+                    }
+
+                    form.classList.add('was-validated')
+                }, false)
+            })
+        })();
+    </script>
+</body>
+</html>

@@ -97,12 +97,6 @@ namespace RivneBloodTransfusionCenter.Controllers
         }
         [Authorize]
         [HttpGet]
-        public IActionResult HomePage()
-        {
-           return View();
-        }
-        [Authorize]
-        [HttpGet]
         public IActionResult Profile()
         {
             string userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;

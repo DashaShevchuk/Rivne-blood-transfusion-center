@@ -76,7 +76,7 @@ namespace RivneBloodTransfusionCenter.Controllers
                 else
                 {
                     await signInManager.SignInAsync(user, model.RememberMe);
-                    return RedirectToAction("HomePage", "Donor");
+                    return RedirectToAction("WhereDonate", "Donor");
                 }
             }
             TempData["ErrorMessage"] = "Неправильний пароль";
@@ -156,9 +156,17 @@ namespace RivneBloodTransfusionCenter.Controllers
                 return BadRequest();
             }
         }
+
         [Authorize]
         [HttpGet]
         public IActionResult WhereDonate()
+        {
+            return View();
+        }
+
+        [Authorize]
+        [HttpGet]
+        public IActionResult FAQ()
         {
             return View();
         }

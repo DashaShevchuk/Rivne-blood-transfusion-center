@@ -13,6 +13,8 @@ using System.Numerics;
 using RivneBloodTransfusionCenter.Data.Features.Donor;
 using RivneBloodTransfusionCenter.Data.Interfaces.DonorInterfaces;
 using RivneBloodTransfusionCenter.Data.Services;
+using RivneBloodTransfusionCenter.Data.Interfaces.HomeInterfaces;
+using RivneBloodTransfusionCenter.Data.Features.Home;
 
 namespace RivneBloodTransfusionCenter
 {
@@ -45,6 +47,10 @@ namespace RivneBloodTransfusionCenter
             services.AddTransient<IDonorCommands, DonorCommands>();
             services.AddTransient<IDonorQueries, DonorQueries>();
             services.AddTransient<IDonorService, DonorService>();
+
+            services.AddTransient<IHomeCommands, HomeCommands>();
+            services.AddTransient<IHomeQueries, HomeQueries>();
+            services.AddTransient<IHomeService, HomeService>();
 
             services.AddControllersWithViews();
         }

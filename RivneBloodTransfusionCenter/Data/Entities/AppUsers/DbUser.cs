@@ -10,6 +10,8 @@ namespace RivneBloodTransfusionCenter.Data.Entities.AppUsers
 
         public string LastName { get; set; }
 
+        public string DateOfBirth { get; set; }
+
         public int SexId { get; set; }
 
         public virtual Sex Sex { get; set; }

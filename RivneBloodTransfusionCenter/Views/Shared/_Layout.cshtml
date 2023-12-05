@@ -23,7 +23,7 @@
                         <a asp-area="" asp-controller="Home" asp-action="Centers">Де здати кров</a>
                     </li>
                     <li>
-                        <a asp-area="" asp-controller="Home" asp-action="Request">Потрібні донори?</a>
+                        <a asp-area="" asp-controller="Home" asp-action="RecipientRegistration">Потрібні донори?</a>
                     </li>
                     @if (User.IsInRole("Donor"))
                     {
@@ -38,11 +38,7 @@
                         </li>
                     }
                 </ul>
-                @*<partial name="_LoginPartial" />*@
             </nav>
-
-           @* <i class="mobile-nav-toggle mobile-nav-show bi bi-list"></i>
-            <i class="mobile-nav-toggle mobile-nav-hide d-none bi bi-x"></i>*@
         </div>
     </header>
 

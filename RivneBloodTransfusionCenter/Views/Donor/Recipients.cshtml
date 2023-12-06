@@ -1,0 +1,122 @@
+﻿@model RivneBloodTransfusionCenter.ViewModels.Donor.GetRecipientsViewModel;
+@{
+    Layout = "~/Views/Shared/_DonorLayout.cshtml";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=1,initial-scale=1,user-scalable=1" />
+    <title>@ViewData["Title"] - UI</title>
+
+    <link rel="stylesheet" type="text/css" href="~/css/donor/recipients-style.css" />
+    <link rel="stylesheet" type="text/css" href="~/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/UI.styles.css" asp-append-version="true" />
+</head>
+<body>
+    <div class="content">
+        <h5 class="fw-bold" id="donations">Рекомендовані реципієнти</h5>
+        <p class="fw-normal" style="color:gray">На цій сторінці відображається список рекомендованих для вас реципієнтів. Список формується на основі центрів крові, які ви додали в список улюблених та вашого міста, вказаного в профілі.</p>
+        <div class="table-div">
+            <table class="table table-striped table-hover">
+                <thead>
+                    <tr>
+                        <th scope="col">Реципієнт</th>
+                        <th scope="col">Центр крові</th>
+                        <th scope="col">Захворювання</th>
+                        <th scope="col">Група крові</th>
+                        <th scope="col">Тип донації</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model != null)
+                    {
+                        @foreach (var item in Model.Recipients)
+                        {
+                            <tr class="recipient-row" data-name="@item.SerName @item.Name @item.LastName" 
+                                                      data-donation-center="@item.DonationCenter"
+                                                      data-sickness="@item.Sicknesses.FirstOrDefault()?.Name" 
+                                                      data-blood-type="@item.BloodTypes.FirstOrDefault()?.Name"
+                                                      data-donation-type="@item.DonationTypes.FirstOrDefault()?.Name"
+                                                      data-placeoftreatment-type="@item.PlaceOfTreatment"
+                                                      data-description-type="@item.Description"
+                                                      data-isforyourself-type="@item.IsForYourself"
+                                                      data-contactperson-type="@item.ContactPerson"
+                                                      data-email-type="@item.Email"
+                                                      data-phone-type="@item.PhoneNumber">
+                                <td>@item.SerName @item.Name</td>
+                                <td>@item.DonationCenter</td>
+                                @foreach (var sikness in item.Sicknesses)
+                                {
+                                    if (sikness.Id == item.SexId)
+                                    {
+                                        <td>@sikness.Name</td>
+                                    }
+                                }
+                                @foreach (var bloodType in item.BloodTypes)
+                                {
+                                    if (bloodType.Id == item.BloodTypeId)
+                                    {
+                                        <td>@bloodType.Name</td>
+                                    }
+                                }
+                                @foreach (var donationType in item.DonationTypes)
+                                {
+                                    if (donationType.Id == item.DonationTypeId)
+                                    {
+                                        <td>@donationType.Name</td>
+                                    }
+                                }
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+            <div class="modal fade" id="recipientModal" tabindex="-1" role="dialog" aria-labelledby="recipientModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="staticBackdropLabel">Інформація про реціпієнта</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body" id="recipientModalBody"> </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('.recipient-row').click(function () {
+                var name = $(this).data('name');
+                var donationCenter = $(this).data('donation-center');
+                var sickness = $(this).data('sickness');
+                var bloodType = $(this).data('blood-type');
+                var donationType = $(this).data('donation-type');
+                var placeOfTreatment = $(this).data('placeoftreatment-type');
+                var description = $(this).data('description-type');
+                var isForYourself = $(this).data('isforyourself-type');
+                var contactPerson = $(this).data('contactperson-type');
+                var email = $(this).data('email-type');
+                var phone = $(this).data('phone-type');
+
+                var modalBody = `
+                                <p><strong>Ім'я:</strong> ${name}</p>
+                                <p><strong>Хвороба:</strong> ${sickness}</p>
+                                <p><strong>Група крові:</strong> ${bloodType}</p>
+                                <p><strong>Тип донації:</strong> ${donationType}</p>
+                                <p><strong>Центр крові:</strong> ${donationCenter}</p>
+                                <p><strong>Місце лікування:</strong> ${placeOfTreatment}</p>
+                                <p><strong>Опишіть вашу ситуацію:</strong> ${description}</p>         
+                            `;
+
+                $('#recipientModalBody').html(modalBody);
+                $('#recipientModal').modal('show');
+            });
+        });
+    </script>
+</body>
+</html>

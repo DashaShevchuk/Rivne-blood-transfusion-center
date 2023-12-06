@@ -34,9 +34,9 @@ namespace RivneBloodTransfusionCenter.Data.EfDbContext
             modelBuilder.ApplyConfiguration(new BloodTypeConfiguration());
             modelBuilder.ApplyConfiguration(new DonationTypeConfiguration());
             modelBuilder.ApplyConfiguration(new SicknessConfiguration());
+            modelBuilder.ApplyConfiguration(new AdminProfileConfiguration());
             modelBuilder.ApplyConfiguration(new RecipientProfileConfiguration());
             modelBuilder.ApplyConfiguration(new DonorProfileConfiguration());
-            modelBuilder.ApplyConfiguration(new AdminProfileConfiguration());
             modelBuilder.ApplyConfiguration(new DonationConfiguration());
         }
     }

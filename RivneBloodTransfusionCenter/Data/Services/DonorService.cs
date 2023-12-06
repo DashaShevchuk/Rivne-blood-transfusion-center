@@ -80,6 +80,43 @@ namespace RivneBloodTransfusionCenter.Data.Services
             return donorProfile;
         }
 
+        public GetRecipientsViewModel GetRecipients()
+        {
+            var recipients = donorQueries.GetRecipients();
+            List<RecipientProfileViewModel> profiles=new List<RecipientProfileViewModel>();
+
+            foreach (var item in recipients)
+            {
+
+                RecipientProfileViewModel recipientModel = new()
+                {
+                    Name = item.Name,
+                    SerName = item.SerName,
+                    LastName = item.LastName,
+                    PhoneNumber=item.PhoneNumber,
+                    Email=item.Email,
+                    PlaceOfTreatment=item.RecipientProfile.PlaceOfTreatment,
+                    RequiredNumberOfDonors=item.RecipientProfile.RequiredNumberOfDonors,
+                    DonationCenter=item.RecipientProfile.DonationCenter,
+                    Description=item.RecipientProfile.Description,
+                    IsForYourself=item.RecipientProfile.IsForYourself,
+                    ContactPerson=item.RecipientProfile.ContactPerson,
+                    SexId=item.SexId,
+                    SicknessId=item.RecipientProfile.SicknessId,
+                    DonationTypeId=item.RecipientProfile.DonationTypeId,
+                    BloodTypeId=item.RecipientProfile.BloodTypeId,
+                    Sexes= donorQueries.GetSexes(),
+                    BloodTypes=donorQueries.GetBloodTypes(),
+                    DonationTypes=donorQueries.GetDonationTypes(),
+                    Sicknesses=donorQueries.GetSicknesses(),
+                 };
+
+                profiles.Add(recipientModel);
+            }
+
+            return new GetRecipientsViewModel { Recipients = profiles };
+        }
+
         public RegistrationViewModel GetRegistrationData()
         {
             return new RegistrationViewModel { BloodTypes = donorQueries.GetBloodTypes(), Sexes = donorQueries.GetSexes() };

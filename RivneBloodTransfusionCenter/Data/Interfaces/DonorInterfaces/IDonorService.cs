@@ -18,5 +18,7 @@ namespace RivneBloodTransfusionCenter.Data.Interfaces.DonorInterfaces
         HttpStatusCode EditProfile(DonorProfileViewModel model, string userId);
 
         HttpStatusCode AddDonation(AddDonationViewModel model);
+
+        GetRecipientsViewModel GetRecipients();
     }
 }

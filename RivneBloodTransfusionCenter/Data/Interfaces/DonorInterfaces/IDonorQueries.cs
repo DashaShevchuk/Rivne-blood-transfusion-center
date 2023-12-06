@@ -15,5 +15,9 @@ namespace RivneBloodTransfusionCenter.Data.Interfaces.DonorInterfaces
         IEnumerable<DonationType> GetDonationTypes();
 
         IEnumerable<Donation> GetDonations();
+
+        IEnumerable<DbUser> GetRecipients();
+
+        IEnumerable<Sickness> GetSicknesses();
     }
 }

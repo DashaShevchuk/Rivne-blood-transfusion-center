@@ -40,11 +40,19 @@ namespace RivneBloodTransfusionCenter.Data.Features.Donor
             return context.Users.Include(x => x.DonorProfile).FirstOrDefault(x => x.Id == userId);
         }
 
+        public IEnumerable<DbUser> GetRecipients()
+        {
+            return context.Users.Include(x=>x.RecipientProfile).Where(x=>x.RecipientProfile!=null).ToList();
+        }
+
         public IEnumerable<Sex> GetSexes()
         {
             return context.Sexes.ToList();
         }
 
-        
+        public IEnumerable<Sickness> GetSicknesses()
+        {
+            return context.Sicknesses.ToList();
+        }
     }
 }

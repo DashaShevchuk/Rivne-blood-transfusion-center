@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using RivneBloodTransfusionCenter.Data.EfDbContext;
 using RivneBloodTransfusionCenter.Data.Entities;
 using RivneBloodTransfusionCenter.Data.Entities.AppUsers;
 using RivneBloodTransfusionCenter.Data.Features.Donor;
@@ -13,16 +14,19 @@ namespace RivneBloodTransfusionCenter.Data.Services
     {
         private readonly IHomeQueries homeQueries;
         private readonly IHomeCommands homeCommands;
+        private readonly EfContext context;
         private readonly UserManager<DbUser> userManager;
         private readonly SignInManager<DbUser> signInManager;
 
         public HomeService(IHomeQueries homeQueries,
                            IHomeCommands homeCommands,
-                            UserManager<DbUser> userManager,
-                            SignInManager<DbUser> signInManager)
+                           EfContext context,
+                           UserManager<DbUser> userManager,
+                           SignInManager<DbUser> signInManager)
         {
             this.homeQueries = homeQueries;
             this.homeCommands = homeCommands;
+            this.context=context;
             this.userManager = userManager;
             this.signInManager = signInManager;
         }
@@ -42,15 +46,16 @@ namespace RivneBloodTransfusionCenter.Data.Services
 
             RecipientProfile recipientProfile = new()
             {
-                PlaceOfTreatment=model.PlaceOfTreatment,
-                DonationTypeId=model.DonationTypeId,
-                BloodTypeId=model.BloodTypeId,
-                SicknessId=model.SicknessId,
-                RequiredNumberOfDonors=model.RequiredNumberOfDonors,
-                DonationCenter=model.DonationCenter,
-                Description=model.Description,
-                IsForYourself=model.IsForYourself,
-                ContactPerson=model.ContactPerson,
+                PlaceOfTreatment = model.PlaceOfTreatment,
+                DonationTypeId = model.DonationTypeId,
+                BloodTypeId = model.BloodTypeId,
+                SicknessId = model.SicknessId,
+                Email = model.Email,
+                RequiredNumberOfDonors = model.RequiredNumberOfDonors,
+                DonationCenter = model.DonationCenter,
+                Description = model.Description,
+                IsForYourself = model.IsForYourself,
+                ContactPerson = model.ContactPerson
             };
 
             var user = new DbUser()
@@ -67,31 +72,21 @@ namespace RivneBloodTransfusionCenter.Data.Services
                 PhoneNumber = model.PhoneNumber,
                 DateOfBirth=model.DateOfBirth,
                 SexId=model.SexId,
-                RecipientProfile= recipientProfile
+               RecipientProfile=recipientProfile
             };
+
             var result = await userManager.CreateAsync(user);
             var addToRoleResult = await userManager.AddToRoleAsync(user, roleName);
-            return HttpStatusCode.OK;
-            //var result = await userManager.CreateAsync(user);
 
-            //if (result.Succeeded)
-            //{
-            //    var addToRoleResult = await userManager.AddToRoleAsync(user, roleName);
-
-            //    if (addToRoleResult.Succeeded)
-            //    {
-            //        await signInManager.SignInAsync(user, false);
-            //        return HttpStatusCode.OK;
-            //    }
-            //    else
-            //    {
-            //        return HttpStatusCode.BadRequest;
-            //    }
-            //}
-            //else
-            //{
-            //    return HttpStatusCode.BadRequest;
-            //}
+            if (result.Succeeded && addToRoleResult.Succeeded)
+            {
+                await signInManager.SignInAsync(user, false);
+                return HttpStatusCode.OK;
+            }
+            else
+            {
+                return HttpStatusCode.BadRequest;
+            }
         }
     }
 }

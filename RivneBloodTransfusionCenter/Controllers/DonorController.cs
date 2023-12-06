@@ -65,8 +65,7 @@ namespace RivneBloodTransfusionCenter.Controllers
         [HttpPost]
         public async Task<IActionResult> Login(LoginViewModel model)
         {
-            //var user = await userManager.FindByEmailAsync(model.Email);
-            DbUser user = context.DonorProfiles.Select(x=>x.User).FirstOrDefault(x=>x.Email==model.Email);
+            DbUser user = context.DonorProfiles.Select(x => x.User).FirstOrDefault(x => x.Email == model.Email);
             if (user == null)
             {
                 TempData["ErrorMessage"] = "Користувача не знайдено";
@@ -178,6 +177,14 @@ namespace RivneBloodTransfusionCenter.Controllers
         public IActionResult FAQ()
         {
             return View();
+        }
+
+        [Authorize]
+        [HttpGet]
+        public IActionResult Recipients()
+        {
+            GetRecipientsViewModel model = donorService.GetRecipients();
+            return View(model);
         }
     }
 }

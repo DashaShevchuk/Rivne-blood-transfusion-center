@@ -1,4 +1,20 @@
-﻿.shape1 {
+﻿:root {
+    /* ===== Colors ===== */
+    --body-color: #e4e9f7;
+    --sidebar-color: #008374;
+    --primary-color: #008374;
+    --seconnary-color: #f85a40;
+    --primary-light-color: #f6f5ff;
+    --toggle-color: #ddd;
+    --text-color: #9ACEC1;
+    --active-text-color: #fff;
+    /* ====== Transition ====== */
+    --tran-03: all 0.2s ease;
+    --tran-03: all 0.3s ease;
+    --tran-04: all 0.3s ease;
+    --tran-05: all 0.3s ease;
+}
+.shape1 {
     width: 0px;
     height: 0px;
     position: absolute;

@@ -8,7 +8,7 @@
             <h1 class="display-4 fw-bold lh-1">Дізнайтеся більше про те, як стати донором крові на нашому веб-сайті.</h1>
             <p class="lead">ров потрібна для операцій, травм, хвороб і інших медичних процедур. Донація крові допомагає забезпечити пацієнтів тією кров'ю, яка їм потрібна, щоб вижити.</p>
             <div class="d-grid gap-2 d-md-flex justify-content-md-start mb-4 mb-lg-3">
-                <button type="button" class="btn btn-primary btn-lg px-4 me-md-2 fw-bold">Я хочу допомогти</button>
+                <a asp-area="" asp-controller="Home" asp-action="RecipientRegistration" class="btn btn-primary btn-lg px-4 me-md-2 fw-bold">Я хочу допомогти</a>
             </div>
         </div>
         <div class="col-lg-4 offset-lg-1 p-0 overflow-hidden">
@@ -77,55 +77,49 @@
 <section class="pt-5 pb-5">
     <div class="container">
         <div class="row">
-            <div class="col-12" >
-                <div id="caruselid" class="row align-items-center rounded-3 border shadow-lg" data-ride="carousel">
+            <div class="col-12">
+                <div id="carouselid" class="row align-items-center rounded-3 border shadow-lg" data-ride="carousel">
                     <div class="carousel-inner">
                         <div class="carousel-item active">
                             <div class="row" style="margin-top: 15px">
                                 <div class="col-md-4 mb-3">
-                                    <div class="card">
+                                    <div class="card h-100">
                                         <img class="img-fluid" alt="100%x280" src="~/src/photos/News/news1.png">
                                         <div class="card-body">
                                             <h4 class="card-title">Донорство це весело</h4>
                                             <p class="card-text">Отримуйте безліч бонусів за допомогу іншим людям!</p>
-
                                         </div>
-
                                     </div>
                                 </div>
                                 <div class="col-md-4 mb-3">
-                                    <div class="card">
+                                    <div class="card h-100">
                                         <img class="img-fluid" alt="100%x280" src="~/src/photos/News/news2.png">
                                         <div class="card-body">
                                             <h4 class="card-title">Дізнайся свою групу крові</h4>
                                             <p class="card-text">Безкоштовно проводимо аналіз групи крові. Запис на сайті</p>
-
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-md-4 mb-3">
-                                    <div class="card">
+                                    <div class="card h-100">
                                         <img class="img-fluid" alt="100%x280" src="~/src/photos/News/news3.png">
                                         <div class="card-body">
                                             <h4 class="card-title">Рятуй життя з нами!</h4>
                                             <p class="card-text">Кожен день ми рятуємо 100 життів. Будь разом з нами</p>
-
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-md-4 mb-3">
-                                    <div class="card">
+                                    <div class="card h-100">
                                         <img class="img-fluid" alt="100%x280" src="~/src/photos/News/news4.png">
                                         <div class="card-body">
                                             <h4 class="card-title">Твори добро!!!</h4>
                                             <p class="card-text">Встановлено новий рекорд відвідувачів за день..</p>
-
                                         </div>
-
                                     </div>
                                 </div>
                                 <div class="col-md-4 mb-3">
-                                    <div class="card">
+                                    <div class="card h-100">
                                         <img class="img-fluid" alt="100%x280" src="~/src/photos/News/news5.png">
                                         <div class="card-body">
                                             <h4 class="card-title">Кожен раз!</h4>
@@ -134,7 +128,7 @@
                                     </div>
                                 </div>
                                 <div class="col-md-4 mb-3">
-                                    <div class="card">
+                                    <div class="card h-100">
                                         <img class="img-fluid" alt="100%x280" src="~/src/photos/News/news6.png">
                                         <div class="card-body">
                                             <h4 class="card-title">Це молодіжно</h4>
@@ -150,4 +144,5 @@
         </div>
     </div>
 </section>
+
 

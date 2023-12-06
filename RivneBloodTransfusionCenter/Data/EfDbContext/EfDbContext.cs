@@ -23,6 +23,7 @@ namespace RivneBloodTransfusionCenter.Data.EfDbContext
         public virtual DbSet<RecipientProfile> RecipientProfiles { get; set; }
         public virtual DbSet<DonorProfile> DonorProfiles { get; set; }
         public virtual DbSet<AdminProfile> AdminProfiles { get; set; }
+        public virtual DbSet<Donation> Donations { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
@@ -33,9 +34,10 @@ namespace RivneBloodTransfusionCenter.Data.EfDbContext
             modelBuilder.ApplyConfiguration(new BloodTypeConfiguration());
             modelBuilder.ApplyConfiguration(new DonationTypeConfiguration());
             modelBuilder.ApplyConfiguration(new SicknessConfiguration());
+            modelBuilder.ApplyConfiguration(new AdminProfileConfiguration());
             modelBuilder.ApplyConfiguration(new RecipientProfileConfiguration());
             modelBuilder.ApplyConfiguration(new DonorProfileConfiguration());
-            modelBuilder.ApplyConfiguration(new AdminProfileConfiguration());
+            modelBuilder.ApplyConfiguration(new DonationConfiguration());
         }
     }
 }

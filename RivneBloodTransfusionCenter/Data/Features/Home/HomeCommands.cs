@@ -19,16 +19,11 @@ namespace RivneBloodTransfusionCenter.Data.Features.Home
             this.userManager = userManager;
             this.signInManager = signInManager;
         }
-        public void AddRecipientProfile(RecipientProfile profile)
+
+        public void SaveRecipientProfile(RecipientProfile profile)
         {
             context.RecipientProfiles.Add(profile);
             context.SaveChanges();
-        }
-
-        public async Task AddUser(DbUser user)
-        {
-            var result = await context.Users.AddAsync(user);
-            await context.SaveChangesAsync();
         }
     }
 }

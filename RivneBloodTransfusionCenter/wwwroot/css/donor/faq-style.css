@@ -1,0 +1,36 @@
+﻿:root {
+    /* ===== Colors ===== */
+    --body-color: #e4e9f7;
+    --sidebar-color: #008374;
+    --primary-color: #008374;
+    --seconnary-color: #f85a40;
+    --primary-light-color: #f6f5ff;
+    --toggle-color: #ddd;
+    --text-color: #9ACEC1;
+    --active-text-color: #fff;
+    /* ====== Transition ====== */
+    --tran-03: all 0.2s ease;
+    --tran-03: all 0.3s ease;
+    --tran-04: all 0.3s ease;
+    --tran-05: all 0.3s ease;
+}
+.content {
+    width: 160vh;
+    padding-top: 10%;
+    padding-left:10%;
+    display: flex;
+    justify-content: center;
+}
+.selectedText{
+    color:var(--seconnary-color);
+}
+.table{
+    color:gray;
+}
+.shape1 {
+    border-width: 300vh 0 300vh 50vh;
+}
+
+.shape2 {
+    border-width: 250vh 0 250vh 50vh;
+}

@@ -5,9 +5,20 @@ namespace RivneBloodTransfusionCenter.Data.Interfaces.DonorInterfaces
 {
     public interface IDonorService
     {
-        public RegistrationViewModel GetRegistrationData();
-        public Task<HttpStatusCode> Registration(RegistrationViewModel model);
-        public Task<HttpStatusCode> Logout();
+        RegistrationViewModel GetRegistrationData();
 
+        AddDonationViewModel GetAddDonationData();
+
+        Task<HttpStatusCode> Registration(RegistrationViewModel model);
+        
+        Task<HttpStatusCode> Logout();
+
+        DonorProfileViewModel GetDonorProfileById(string userId);
+
+        HttpStatusCode EditProfile(DonorProfileViewModel model, string userId);
+
+        HttpStatusCode AddDonation(AddDonationViewModel model);
+
+        GetRecipientsViewModel GetRecipients();
     }
 }

@@ -5,8 +5,6 @@ namespace RivneBloodTransfusionCenter.Data.Interfaces.HomeInterfaces
 {
     public interface IHomeCommands
     {
-        void AddRecipientProfile(RecipientProfile profile);
-
-        Task AddUser(DbUser user);
+        void SaveRecipientProfile(RecipientProfile profile);
     }
 }
